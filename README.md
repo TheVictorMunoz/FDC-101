@@ -17,6 +17,75 @@ A small collection of working examples demonstrating Flare Data Connector (FDC) 
 - **Functionality**: Fetches character data from Star Wars API and processes it on-chain
 - **Verification**: [View on Block Explorer](https://coston2-explorer.flare.network/address/0xE7f6ff7bD309621ae9e2339C829544E6C58bD8Ba#code)
 
+
+### Web2Json Flow Diagram
+
+```
+External API (Star Wars)     FDC Verifier Server     FDC Hub Contract     Validators     DA Layer     Smart Contract
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |              |
+      |  1. API URL +              |                       |                   |            |              |
+      |     processing rules       |                       |                   |            |              |
+      |--------------------------->|                       |                   |            |              |
+      |                            |                       |                   |            |              |
+      |                            |  2. Encoded request   |                   |            |              |
+      |                            |---------------------->|                   |            |              |
+      |                            |                       |                   |            |              |
+      |                            |                       |  3. Voting round |            |              |
+      |                            |                       |------------------>|            |              |
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |  4. Fetch  |              |
+      |                            |                       |                   |   API data |              |
+      |                            |                       |                   |<-----------|              |
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |  5. Verify |              |
+      |                            |                       |                   |   & vote   |              |
+      |                            |                       |                   |---------->|              |
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |  6. Generate |
+      |                            |                       |                   |            |   proof     |
+      |                            |                       |                   |            |<------------|
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |  7. Request |
+      |                            |                       |                   |            |   proof     |
+      |                            |                       |                   |            |------------>|
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |  8. Return  |
+      |                            |                       |                   |            |   proof     |
+      |                            |                       |                   |            |<------------|
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |  9. Verify  |
+      |                            |                       |                   |            |   proof &   |
+      |                            |                       |                   |            |   calculate |
+      |                            |                       |                   |            |   BMI       |
+      |                            |                       |                   |            |              |
+      |                            |                       |                   |            |  10. Store  |
+      |                            |                       |                   |            |   on chain  |
+      |                            |                       |                   |            |              |
+```
+
+#### Step-by-Step Explanation:
+
+1. **Request Preparation**: Script sends Star Wars API URL and processing rules to FDC verifier server
+2. **Encode Request**: Server creates encoded attestation request
+3. **Submit to FDC Hub**: Encoded request submitted to FDC Hub contract on Flare blockchain
+4. **Voting Round**: Validators fetch data from Star Wars API during voting round
+5. **Verify & Vote**: Validators verify the data and vote on its authenticity
+6. **Generate Proof**: DA Layer generates cryptographic proof after round finalization
+7. **Request Proof**: Script requests proof from DA Layer
+8. **Return Proof**: DA Layer returns the cryptographic proof
+9. **Verify & Process**: Smart contract verifies proof and calculates BMI from character data
+10. **Store on Chain**: Enhanced character information stored permanently on Flare blockchain
+
+#### Key Components:
+
+- **External API**: Source of real-world data (Star Wars API)
+- **FDC Verifier Server**: Prepares attestation requests
+- **FDC Hub Contract**: Manages attestation requests and voting rounds
+- **Validators**: Fetch and verify external data
+- **DA Layer**: Generates cryptographic proofs
+- **Smart Contract**: Processes verified data and stores results
+
 ### Weather Insurance Contracts
 - **Min Temperature Insurance**: Insurance against low temperature events
 - **Weather ID Verification**: Location-based weather data verification
