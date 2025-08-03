@@ -2,14 +2,14 @@
 
 A comprehensive collection of working examples demonstrating Flare Data Connector (FDC) capabilities. This project showcases how to integrate external data sources with Flare blockchain using various attestation types.
 
-## 🚀 What This Project Demonstrates
+##  What This Project Demonstrates
 
 - **Web2Json Attestations**: Fetch and verify data from external APIs
 - **Weather Insurance**: Real-world insurance contracts using weather data
 - **Proof of Reserves**: Cryptographic proof systems for asset verification
 - **Cross-Chain FDC**: Multi-chain data connectivity solutions
 
-## ✅ Verified Working Examples
+##  Verified Working Examples
 
 ### Star Wars API Integration
 - **Contract**: `StarWarsCharacterListV2` deployed at `0xE7f6ff7bD309621ae9e2339C829544E6C58bD8Ba`
@@ -58,7 +58,7 @@ A comprehensive collection of working examples demonstrating Flare Data Connecto
    - Enter your wallet address
    - Request testnet FLARE tokens
 
-## 🧪 Running Examples
+##  Running Examples
 
 ### Web2Json Example (Star Wars API)
 ```bash
@@ -81,7 +81,7 @@ yarn hardhat run scripts/weatherInsurance/weatherId/createPolicy.ts --network co
 yarn hardhat run scripts/weatherInsurance/weatherId/resolvePolicy.ts --network coston2
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 ├── contracts/
@@ -96,7 +96,7 @@ yarn hardhat run scripts/weatherInsurance/weatherId/resolvePolicy.ts --network c
 └── hardhat.config.ts         # Hardhat configuration
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 ### Supported Networks
 - **Coston2 Testnet** (Chain ID: 114) - Primary testnet
@@ -112,7 +112,7 @@ FLARESCAN_API_KEY=your_flarescan_api_key
 OPEN_WEATHER_API_KEY=your_openweather_api_key
 ```
 
-## 🎯 Key Features
+##  Key Features
 
 ### FDC Attestation Types
 - **Web2Json**: HTTP API data fetching and verification
@@ -127,7 +127,7 @@ OPEN_WEATHER_API_KEY=your_openweather_api_key
 - **Event Logging**: Comprehensive transaction logging
 - **Error Handling**: Robust error handling and recovery
 
-## 📊 Example Output
+##  Example Output
 
 Running the Web2Json example produces:
 ```
@@ -146,14 +146,14 @@ Star Wars Characters:
 ]
 ```
 
-## 🔗 Useful Links
+##  Useful Links
 
 - **Voting Round Explorer**: https://coston2-systems-explorer.flare.rocks/
 - **Block Explorer**: https://coston2-explorer.flare.network/
 - **FDC Documentation**: https://dev.flare.network/fdc/
 - **Flare Developer Hub**: https://dev.flare.network/
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -161,25 +161,12 @@ Star Wars Characters:
 4. Test thoroughly on testnet
 5. Submit a pull request
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License.
 
-## 🆘 Troubleshooting
-
-### Common Issues
-
-**"gas required exceeds allowance"**
-- Solution: Get testnet tokens from the faucet
-
-**"Tenderly config doesn't exist"**
-- This is a warning, not an error. The project works without Tenderly
-
-**"Network connection issues"**
-- Check your internet connection
-- Verify RPC endpoint availability
 
 ### Getting Help
 - Check the [Flare Developer Discord](https://discord.gg/flare)
 - Review [FDC documentation](https://dev.flare.network/fdc/)
-- Open an issue on this repository
+
