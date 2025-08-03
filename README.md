@@ -1,13 +1,13 @@
 # FDC-101: Flare Data Connector Examples
 
-A comprehensive collection of working examples demonstrating Flare Data Connector (FDC) capabilities. This project showcases how to integrate external data sources with Flare blockchain using various attestation types.
+A small collection of working examples demonstrating Flare Data Connector (FDC) capabilities. This project showcases how to integrate external data sources with Flare blockchain using various attestation types. For this first iteration, this repo will be focused on Web2 data attestion.
 
 ##  What This Project Demonstrates
 
 - **Web2Json Attestations**: Fetch and verify data from external APIs
 - **Weather Insurance**: Real-world insurance contracts using weather data
 - **Proof of Reserves**: Cryptographic proof systems for asset verification
-- **Cross-Chain FDC**: Multi-chain data connectivity solutions
+  
 
 ##  Verified Working Examples
 
