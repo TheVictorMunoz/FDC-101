@@ -20,48 +20,73 @@ A small collection of working examples demonstrating Flare Data Connector (FDC) 
 
 ### Web2Json Flow Diagram
 
-```
-External API (Star Wars)     FDC Verifier Server     FDC Hub Contract     Validators     DA Layer     Smart Contract
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |              |
-      |  1. API URL +              |                       |                   |            |              |
-      |     processing rules       |                       |                   |            |              |
-      |--------------------------->|                       |                   |            |              |
-      |                            |                       |                   |            |              |
-      |                            |  2. Encoded request   |                   |            |              |
-      |                            |---------------------->|                   |            |              |
-      |                            |                       |                   |            |              |
-      |                            |                       |  3. Voting round |            |              |
-      |                            |                       |------------------>|            |              |
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |  4. Fetch  |              |
-      |                            |                       |                   |   API data |              |
-      |                            |                       |                   |<-----------|              |
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |  5. Verify |              |
-      |                            |                       |                   |   & vote   |              |
-      |                            |                       |                   |---------->|              |
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |  6. Generate |
-      |                            |                       |                   |            |   proof     |
-      |                            |                       |                   |            |<------------|
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |  7. Request |
-      |                            |                       |                   |            |   proof     |
-      |                            |                       |                   |            |------------>|
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |  8. Return  |
-      |                            |                       |                   |            |   proof     |
-      |                            |                       |                   |            |<------------|
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |  9. Verify  |
-      |                            |                       |                   |            |   proof &   |
-      |                            |                       |                   |            |   calculate |
-      |                            |                       |                   |            |   BMI       |
-      |                            |                       |                   |            |              |
-      |                            |                       |                   |            |  10. Store  |
-      |                            |                       |                   |            |   on chain  |
-      |                            |                       |                   |            |              |
+```mermaid
+sequenceDiagram
+    participant YourScript as Your Script (Web2Json.ts)
+    participant Verifier as FDC Verifier Server<br/>(web2json-verifier-test.flare.rocks)
+    participant FdcHub as FDC Hub Contract<br/>(on Flare blockchain)
+    participant Validators as Flare Validators<br/>(decentralized network)
+    participant StarWarsAPI as External API<br/>(swapi.info)
+    participant DALayer as Data Availability Layer<br/>(API endpoint)
+    participant FdcVerification as FDC Verification System<br/>(ContractRegistry)
+    participant SmartContract as Your Smart Contract<br/>(StarWarsCharacterListV2)
+
+    Note over YourScript,SmartContract: Phase 1: Request Preparation & Submission
+    
+    YourScript->>Verifier: 1. API URL + JQ filter + ABI signature
+    Note right of YourScript: apiUrl: "https://swapi.info/api/people/3"<br/>postProcessJq: "{name: .name, height: .height, ...}"<br/>abiSignature: "{"components": [...], "type": "tuple"}"
+    
+    Verifier->>YourScript: 2. ABI-encoded request (hex string)
+    Note left of Verifier: Converts human-readable request<br/>to binary format for blockchain
+    
+    YourScript->>FdcHub: 3. Submit attestation request (pay fee)
+    Note right of YourScript: fdcHub.requestAttestation(abiEncodedRequest, {value: requestFee})
+    
+    Note over YourScript,SmartContract: Phase 2: Decentralized Data Acquisition & Verification
+    
+    FdcHub->>Validators: 4. Broadcast request (start voting round)
+    Note left of FdcHub: Creates voting round<br/>Round ID: 1063464
+    
+    Validators->>StarWarsAPI: 5. Fetch raw data independently
+    Note right of Validators: Each validator makes HTTP GET request<br/>to get raw JSON response
+    
+    StarWarsAPI->>Validators: 6. Return raw JSON data
+    Note left of StarWarsAPI: {"name": "R2-D2", "height": "96",<br/>"mass": "32", "films": [...], ...}
+    
+    Validators->>Validators: 7. Apply JQ filter to raw data
+    Note right of Validators: {name: .name, height: .height, mass: .mass,<br/>numberOfFilms: .films | length,<br/>uid: (.url | split("/") | .[-1] | tonumber)}
+    
+    Validators->>DALayer: 8. Submit attestations with processed data
+    Note right of Validators: Each validator submits their<br/>processed result for voting
+    
+    DALayer->>DALayer: 9. Generate Merkle proof from attestations
+    Note right of DALayer: Creates cryptographic proof<br/>when supermajority agrees
+    
+    Note over YourScript,SmartContract: Phase 3: Proof Retrieval & Smart Contract Usage
+    
+    YourScript->>DALayer: 10. Request proof by round ID
+    Note right of YourScript: retrieveDataAndProof(abiEncodedRequest, roundId)<br/>URL: coston2-data-availability.flare.network/api/v1/fdc/proof-by-request-round-raw
+    
+    DALayer->>YourScript: 11. Return proof (response_hex + merkle_proof)
+    Note left of DALayer: Returns:<br/>- response_hex: processed data<br/>- proof: merkle proof array
+    
+    YourScript->>SmartContract: 12. Deploy contract
+    Note right of YourScript: StarWarsCharacterListV2.new()
+    
+    YourScript->>SmartContract: 13. Call addCharacter() with proof
+    Note right of YourScript: characterList.addCharacter({<br/>merkleProof: proof.proof,<br/>data: decodedResponse<br/>})
+    
+    SmartContract->>FdcVerification: 14. Verify proof validity
+    Note right of SmartContract: ContractRegistry.getFdcVerification()<br/>.verifyJsonApi(_proof)
+    
+    FdcVerification->>SmartContract: 15. Proof verification result
+    Note left of FdcVerification: Returns true if proof is valid
+    
+    SmartContract->>SmartContract: 16. Calculate BMI & store data
+    Note right of SmartContract: bmi = (mass * 100 * 100) / (height * height)<br/>Store: {name: "R2-D2", numberOfMovies: 6,<br/>apiUid: 3, bmi: 34}
+    
+    SmartContract->>YourScript: 17. Return stored characters
+    Note left of SmartContract: getAllCharacters() returns<br/>processed character data with calculated BMI
 ```
 
 #### Step-by-Step Explanation:
