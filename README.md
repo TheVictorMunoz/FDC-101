@@ -116,7 +116,7 @@ sequenceDiagram
 - **Weather ID Verification**: Location-based weather data verification
 - **Real-time Data**: Integration with OpenWeather API
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -253,7 +253,7 @@ Star Wars Characters:
 2. Create a feature branch
 3. Make your changes
 4. Test thoroughly on testnet
-5. Submit a pull request
+5. Submit a PR
 
 ##  License
 
@@ -262,5 +262,5 @@ This project is licensed under the MIT License.
 
 ### Getting Help
 - Check the [Flare Developer Discord](https://discord.gg/flare)
-- Review [FDC documentation](https://dev.flare.network/fdc/)
+- Review the [FDC documentation](https://dev.flare.network/fdc/)
 
