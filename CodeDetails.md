@@ -6,14 +6,22 @@ This document provides a detailed, step-by-step explanation of the Flare Data Co
 
 We use data from an external API, send it to a server to encode it and prepare an attestation request, after that there will be a voting round with validators fetching and verifying the data that was submitted to the FDC. Once the data has been verified and the voting round finalizes, we can request the DA Layer to fetch the proof. The proof is then sent to a smart contract that will verify the cryptographic proof, perform a basic calculation using the data from the API and store a list of enhanced information on the flare blockchain.
 
-flowchart TD
-    A[1. API Call<br/>Star Wars API] --> B[2. JQ Processing<br/>Extract character data]
-    B --> C[3. FDC Verification<br/>Validators attest]
-    C --> D[4. Proof Generation<br/>Cryptographic proof]
-    D --> E[5. Contract Deployment<br/>StarWarsCharacterListV2]
-    E --> F[6. Data Submission<br/>addCharacter function]
-    F --> G[7. On-chain Processing<br/>BMI calculation]
-    G --> H[8. Permanent Storage<br/>Blockchain]
+1. API Call (Star Wars API)
+   ↓
+2. JQ Processing (Extract character data)
+   ↓
+3. FDC Verification (Validators attest)
+   ↓
+4. Proof Generation (Cryptographic proof)
+   ↓
+5. Contract Deployment (StarWarsCharacterListV2)
+   ↓
+6. Data Submission (addCharacter function)
+   ↓
+7. On-chain Processing (BMI calculation)
+   ↓
+8. Permanent Storage (Blockchain)
+
 
 ## Table of Contents
 
