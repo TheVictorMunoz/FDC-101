@@ -1,15 +1,15 @@
 # FDC-101: Flare Data Connector Examples
 
-A small collection of working examples demonstrating Flare Data Connector (FDC) capabilities. This project showcases how to integrate external data sources with Flare blockchain using various attestation types. For this first iteration, this repo will be focused on Web2 data attestion.
+Documented working examples demonstrating the use of the Flare Data Connector (FDC). This code starts from a simplified version of the [Flare Hardhat starter](https://github.com/flare-foundation/flare-hardhat-starter), and the purpose is purely educational. This first iteration focuses on how to bring external Web2 data sources onto the Flare blockchain.
 
-##  What This Project Demonstrates
+##  What This Project Contains
 
 - **Web2Json Attestations**: Fetch and verify data from external APIs
 - **Weather Insurance**: Real-world insurance contracts using weather data
 - **Proof of Reserves**: Cryptographic proof systems for asset verification
   
 
-##  Verified Working Examples
+##  Web2Json Attestation Example
 
 ### Star Wars API Integration
 - **Contract**: `StarWarsCharacterListV2` deployed at `0xE7f6ff7bD309621ae9e2339C829544E6C58bD8Ba`
@@ -89,7 +89,7 @@ sequenceDiagram
     Note left of SmartContract: getAllCharacters() returns<br/>processed character data with calculated BMI
 ```
 
-#### Step-by-Step Explanation:
+#### Step-by-Step Explanation of the flow:
 
 1. **Request Preparation**: Script sends Star Wars API URL and processing rules to FDC verifier server
 2. **Encode Request**: Server creates encoded attestation request
@@ -100,7 +100,7 @@ sequenceDiagram
 7. **Request Proof**: Script requests proof from DA Layer
 8. **Return Proof**: DA Layer returns the cryptographic proof
 9. **Verify & Process**: Smart contract verifies proof and calculates BMI from character data
-10. **Store on Chain**: Enhanced character information stored permanently on Flare blockchain
+10. **Store Onchain**: Enhanced character information stored permanently on Flare blockchain
 
 #### Key Components:
 
@@ -111,11 +111,12 @@ sequenceDiagram
 - **DA Layer**: Generates cryptographic proofs
 - **Smart Contract**: Processes verified data and stores results
 
-### Weather Insurance Contracts
+### Weather Insurance Contracts (full demo soon)
 - **Min Temperature Insurance**: Insurance against low temperature events
 - **Weather ID Verification**: Location-based weather data verification
 - **Real-time Data**: Integration with OpenWeather API
 
+____
 ## Getting Started
 
 ### Prerequisites
@@ -151,6 +152,8 @@ sequenceDiagram
    - Visit [Coston2 Faucet](https://coston2-faucet.towolabs.com/)
    - Enter your wallet address
    - Request testnet FLARE tokens
+
+____
 
 ##  Running Examples
 
@@ -206,20 +209,14 @@ FLARESCAN_API_KEY=your_flarescan_api_key
 OPEN_WEATHER_API_KEY=your_openweather_api_key
 ```
 
-##  Key Features
 
-### FDC Attestation Types
+### FDC Attestation Types and Features
 - **Web2Json**: HTTP API data fetching and verification
 - **Payment Verification**: Payment transaction verification
 - **Balance Decreasing**: Balance change verification
 - **Address Validity**: Address format verification
 - **Block Height**: Block existence verification
 
-### Smart Contract Integration
-- **Automatic Deployment**: Contracts deploy automatically
-- **Block Explorer Verification**: Source code verification
-- **Event Logging**: Comprehensive transaction logging
-- **Error Handling**: Robust error handling and recovery
 
 ##  Example Output
 
