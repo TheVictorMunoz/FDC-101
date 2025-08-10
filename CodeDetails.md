@@ -12,7 +12,7 @@ flowchart TD
     C --> D[4. Proof Generation<br/>Cryptographic proof]
     D --> E[5. Contract Deployment<br/>StarWarsCharacterListV2]
     E --> F[6. Data Submission<br/>addCharacter function]
-    F --> G[7. Onchain Processing<br/>BMI calculation]
+    F --> G[7. On-chain Processing<br/>BMI calculation]
     G --> H[8. Permanent Storage<br/>Blockchain]
 
 ## Table of Contents
