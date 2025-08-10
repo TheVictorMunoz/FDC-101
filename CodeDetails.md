@@ -766,7 +766,7 @@ Star Wars Characters:
 
 ---
 
-## Technical Deep Dive
+## Technical Details
 
 ### Key Components
 
@@ -795,12 +795,6 @@ Star Wars Characters:
 - **Function**: Ensures data was properly attested by the network
 - **Integration**: Called by smart contracts before using attested data
 
-### Error Handling
-
-#### Common Issues
-1. **"gas required exceeds allowance"**: Insufficient testnet tokens
-2. **"Tenderly config doesn't exist"**: Warning, not an error
-3. **Network connection issues**: RPC endpoint availability
 
 #### Retry Logic
 - **Proof retrieval**: Up to 10 attempts with 20-second delays
@@ -833,7 +827,6 @@ Star Wars Characters:
 
 ---
 
-## Conclusion
 
 The FDC workflow provides a robust, trustless way to integrate external data with blockchain applications. By following these 5 steps, you can:
 
@@ -847,4 +840,4 @@ This system ensures that external data is verified, processed, and made availabl
 
 ---
 
-*This documentation covers the complete FDC workflow as implemented in the FDC-101 project. For more information, refer to the Flare Developer Hub and FDC documentation.*
+
