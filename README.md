@@ -261,3 +261,6 @@ This project is licensed under the MIT License.
 - Check the [Flare Developer Discord](https://discord.gg/flare)
 - Review the [FDC documentation](https://dev.flare.network/fdc/)
 
+___
+
+Deepwiki: https://deepwiki.com/TheVictorMunoz/FDC-101 
