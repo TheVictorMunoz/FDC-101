@@ -102,7 +102,9 @@ sequenceDiagram
 9. **Verify & Process**: Smart contract verifies proof and calculates BMI from character data
 10. **Store Onchain**: Enhanced character information stored permanently on Flare blockchain
 
+______
 Check the details of the flow here: https://github.com/TheVictorMunoz/FDC-101/blob/master/CodeDetails.md
+______
 
 #### Key Components:
 
