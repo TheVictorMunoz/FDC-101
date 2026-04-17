@@ -1,5 +1,7 @@
 # FDC-101: Flare Data Connector Examples
 
+[Repo needs to be updated with new skills and attestations]
+
 Documented working examples demonstrating the use of the Flare Data Connector (FDC). This code starts from a simplified version of the [Flare Hardhat starter](https://github.com/flare-foundation/flare-hardhat-starter), and the purpose is purely educational. This first iteration focuses on how to bring external Web2 data sources onto the Flare blockchain.
 
 ##  What This Project Contains
